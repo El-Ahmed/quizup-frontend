@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  flex: 1;
+}
+.AppSidebar {
+  display: flex;
 }
 
 .App-logo {

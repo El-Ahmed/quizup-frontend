@@ -1,0 +1,16 @@
+.sidebar {
+    width: 200px;
+    background-color: rgb(20, 15, 36);
+    padding-top: 200px;
+}
+.page {
+    border-radius: 0!important;
+    width: 100%!important;
+    color: white!important;
+}
+.pagechosen {
+    border-radius: 0!important;
+    width: 100%!important;
+    color: rgb(20, 15, 36)!important;
+    background-color: rgb(240, 240, 240)!important;
+}
