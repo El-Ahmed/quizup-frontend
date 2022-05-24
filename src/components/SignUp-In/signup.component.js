@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import logo from '../../assets/QUIZZUP_free-file.png';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -39,13 +38,13 @@ export default function SignUp ( ) {
 
         return (
           <div className="container">
-          <div className="banner">
-          <p>WELCOME TO QUIZZ UP</p>
-          <div className="logo-container">
-          <img src={logo} alt="logo"/>
-          </div>
+            <div className="banner">
+               <p>WELCOME TO QUIZZ UP</p>
+            <div className="logo-container">
+            <img src={logo} alt="logo"/>
+            </div>
         
-          </div>
+            </div>
             <form>
                 <h3>Sign Up</h3>
 
