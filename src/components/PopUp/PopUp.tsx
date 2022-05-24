@@ -2,6 +2,7 @@ import { Button, Dialog, DialogContent, DialogContentText, DialogTitle, IconButt
 import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import './PopUp.css';
+import { Link } from "react-router-dom";
 
 
 type popUp = {
@@ -44,7 +45,9 @@ function PopUp(props: popUp) {
             fullWidth
             variant="standard"
           />
+          <Link to='/join'>
             <Button onClick={handleClose}>Join</Button>
+          </Link>
           </div>
         </DialogContent>
         {/* <DialogActions> */}

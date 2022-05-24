@@ -15,6 +15,7 @@ import {
 import Question from './components/Question/Question';
 import SideBar from './components/SideBar/SideBar';
 import HostWait from './components/HostWait/HostWait';
+import Join from './components/Join/Join';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='/quiz/:id' element={<Details/>}></Route>
           <Route path='/play' element={<Question/>} />
           <Route path='/host' element={<HostWait/>} />
+          <Route path='/join' element={<Join/>} />
       </Routes>
     </div>
     </div>
