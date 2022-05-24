@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Details.css' ;
 
 export default function Details() {
@@ -19,7 +20,7 @@ export default function Details() {
 					</div>
 					<div className='quizz-card'>
 						<div className='image-container'>
-							<img src="https://static.hbo.com/content/dam/hbodata/series/chernobyl/key-art/chernobyl-ka-1920.jpg" alt="paris"/>
+							<img className='image' src="https://static.hbo.com/content/dam/hbodata/series/chernobyl/key-art/chernobyl-ka-1920.jpg" alt="paris"/>
 						</div>
 						<div className='quizz-informations'>
 							<p className='information'><p>Date :</p><p>23 / 05 / 2022</p></p>
@@ -37,7 +38,9 @@ export default function Details() {
 					</div>
 					<div className='bouttons'>
 						<button  clasName="host">Host</button>
-						<button  clasName="play">Play</button>
+						<Link to='/play'>
+							<button  clasName="play">Play</button>
+						</Link>
 					</div>
 
 		</div>

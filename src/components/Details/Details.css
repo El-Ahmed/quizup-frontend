@@ -61,6 +61,9 @@
     flex-direction: row;
   }
   
+  .image {
+    max-width: 100%;
+  }
   
   
   button {
