@@ -8,8 +8,16 @@
     width: 100%!important;
     color: white!important;
     background-color: rgb(40, 78, 250);
-
+    font-weight:bolder !important;
+    font-size: 1em !important;
 }
+
+.sidebar-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom:30px;
+    margin-top:-50px;
+  }
 
 .page:hover {
     border-radius: 20px !important;
