@@ -23,7 +23,7 @@ function App() {
       <TopBar/>
       <Routes>
           <Route path='/' element={<Search/>}></Route>
-          {/* <Route path='/quiz/:id' element={<Details/>}></Route> */}
+          <Route path='/quiz/:id' element={<Details/>}></Route>
           <Route path='/play' element={<Question/>} />
       </Routes>
     </div>
