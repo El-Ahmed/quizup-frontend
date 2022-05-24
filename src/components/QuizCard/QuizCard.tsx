@@ -1,4 +1,5 @@
 import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import './quizcard.css';
 
 
@@ -23,9 +24,12 @@ function QuizCard() {
           </Typography>
         </CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', pr: 1, pb: 1 , justifyContent: 'right'}}>
-          <Button aria-label="previous">
-            Details
-          </Button>
+          <Link to='/quiz/1'>
+            <Button aria-label="previous">
+              Details
+            </Button>
+          </Link>
+         
         </Box>
       </Box>
 

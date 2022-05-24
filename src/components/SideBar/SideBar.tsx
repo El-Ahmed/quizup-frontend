@@ -2,6 +2,7 @@
 
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './sidebar.css'
 
 
@@ -17,9 +18,11 @@ function SideBar() {
     }
     return (
     <div className="sidebar">
+        <Link to='/'>
         <Button onClick={() => {setChosen(1)}} className={chosenClass(1)}>Dashboard</Button>
         <Button onClick={() => {setChosen(2)}}className={chosenClass(2)}>Explore</Button>
         <Button onClick={() => {setChosen(3)}}className={chosenClass(3)}>My Quizzes</Button>
+        </Link>
     </div>
     );
 }
