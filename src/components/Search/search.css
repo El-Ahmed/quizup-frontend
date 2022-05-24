@@ -2,7 +2,7 @@
 .searchList {
     padding: 20px;
     overflow-y: scroll;
-    height: 80vh;
+    height: 500px;
 
 }
 .card {

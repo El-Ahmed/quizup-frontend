@@ -4,6 +4,7 @@
 }
 .AppSidebar {
   display: flex;
+  height: 100vh;
 }
 
 .App-logo {
