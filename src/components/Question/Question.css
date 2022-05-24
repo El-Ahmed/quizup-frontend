@@ -1,6 +1,7 @@
 
   .app {
-    background-color: #5a95ec;
+    background-color: #ffffff;
+    margin:auto;
     width: 600px;
     min-height: 200px;
     height: min-content;
