@@ -37,7 +37,9 @@ export default function Details() {
 						</p>
 					</div>
 					<div className='bouttons'>
-						<button  clasName="host">Host</button>
+						<Link to='/host'>
+							<button  clasName="host">Host</button>
+						</Link>
 						<Link to='/play'>
 							<button  clasName="play">Play</button>
 						</Link>
