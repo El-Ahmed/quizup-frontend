@@ -16,6 +16,9 @@ import Question from './components/Question/Question';
 import SideBar from './components/SideBar/SideBar';
 import HostWait from './components/HostWait/HostWait';
 import Join from './components/Join/Join';
+import AnswerState from './components/AnswerState/AnswerState';
+import Score from './components/Score/Score';
+import PlayerWait from './components/PlayerWait/PlayerWait';
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
           <Route path='/play' element={<Question/>} />
           <Route path='/host' element={<HostWait/>} />
           <Route path='/join' element={<Join/>} />
+          <Route path='/score' element={<Score/>} />
+          <Route path='/state' element={<AnswerState/>} />
+          <Route path='/playwait' element={<PlayerWait/>} />
       </Routes>
     </div>
     </div>
