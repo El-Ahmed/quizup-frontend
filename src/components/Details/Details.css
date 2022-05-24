@@ -19,15 +19,15 @@
     min-height: 100vh;
   } */
   
-  .app {
+  .details-app {
     background-color: #ffffff;
     margin: auto;
-    width: 600px;
+    width: 800px;
     min-height: 200px;
     height: min-content;
     border-radius: 15px;
     padding: 15px;
-    box-shadow: 10px 10px 42px 0px rgb(0 0 0 / 75%);
+    box-shadow: 3px 3px 10px 0px rgb(0 0 0 / 75%);
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
@@ -37,6 +37,7 @@
   }
   .theme {
     font-size: 22px;
+    font-weight: 800 !important;
   }
   .details{
     display: flex;
@@ -45,6 +46,8 @@
   }
   .details .titre{
     font-size: 20px;
+    font-weight: 800 !important;
+    margin :10px;
   }
   .quizz-card {
     display: flex;
@@ -55,18 +58,46 @@
   
   .quizz-informations {
     margin : 10px;
-  }
-  
-  .information {
+    flex :50%;
     display: flex;
     flex-direction: row;
   }
   
+  .information-1 {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex:50%;
+    font-weight: 800 !important;
+    font-size: 16px;
+  }
+    
+  .information-1 p {
+    font-weight: 800;
+  }
+  .information-2 {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex:50%;
+    font-size: 16px;
+  }
   .image {
     max-width: 100%;
   }
   
-  
+  .host {
+    background-color: #cccccc !important;
+    min-width: 200px;
+    flex:40% !important;
+  }
+
+  .play{
+    background-color: #5bbaae !important;
+    min-width: 200px;
+    flex:40% !important;
+  }
+
   button {
     width: 100%;
     font-size: 16px;
@@ -76,7 +107,7 @@
     display: flex;
     padding: 5px;
     align-items: center;
-    border: 5px solid #234668;
+    border: none !important;
     cursor: pointer;
     padding:12px;
     justify-content:center;
@@ -87,7 +118,7 @@
    
     display :flex;
     flex-direction: row;
-    justify-content:center;
+    justify-content:end !important;
   
   }
   

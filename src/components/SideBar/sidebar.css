@@ -1,7 +1,9 @@
 .sidebar {
-    width: 200px;
+    width: 250px;
     background-color: #242730;
     padding-top: 200px;
+    padding-right:25px;
+    padding-left:15px;
 }
 .page {
     border-radius: 20px !important;
@@ -10,6 +12,8 @@
     background-color: rgb(40, 78, 250);
     font-weight:bolder !important;
     font-size: 1em !important;
+    margin-left:10px !important;
+    margin-right:10px !important;
 }
 
 .sidebar-logo {

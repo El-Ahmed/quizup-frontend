@@ -14,7 +14,7 @@ export default function Details() {
 
 	
 	return (
-		<div className='app'>
+		<div className='details-app'>
 					<div className='theme'>
 							Movies / Chernobyl			
 					</div>
@@ -23,10 +23,18 @@ export default function Details() {
 							<img className='image' src="https://static.hbo.com/content/dam/hbodata/series/chernobyl/key-art/chernobyl-ka-1920.jpg" alt="paris"/>
 						</div>
 						<div className='quizz-informations'>
-							<p className='information'><p>Date :</p><p>23 / 05 / 2022</p></p>
-							<p className='information'><p>Time per question :</p><p>20 s</p></p>
-							<p className='information'><p>Questions :</p><p>14</p></p>
-							<p className='information'><p>Points :</p><p>200</p></p>
+							<p className='information-1'>
+								<p>Date :</p>
+								<p>Time per question :</p>
+								<p>Questions :</p>
+								<p>Points :</p>
+							</p>
+							<p className='information-2'>
+								<p>23 / 05 / 2022</p>
+								<p>20 s</p>
+								<p>14</p
+								><p>200</p>
+							</p>
 						</div>
 					</div>				
 					<div className='details'>
@@ -38,10 +46,10 @@ export default function Details() {
 					</div>
 					<div className='bouttons'>
 						<Link to='/host'>
-							<button  clasName="host">Host</button>
+							<button  className="host">Host</button>
 						</Link>
 						<Link to='/play'>
-							<button  clasName="play">Play</button>
+							<button  className="play">Play</button>
 						</Link>
 					</div>
 
