@@ -14,6 +14,7 @@ import {
 } from 'react-router-dom';
 import Question from './components/Question/Question';
 import SideBar from './components/SideBar/SideBar';
+import HostWait from './components/HostWait/HostWait';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/' element={<Search/>}></Route>
           <Route path='/quiz/:id' element={<Details/>}></Route>
           <Route path='/play' element={<Question/>} />
+          <Route path='/host' element={<HostWait/>} />
       </Routes>
     </div>
     </div>
