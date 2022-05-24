@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/SignUp-In/login.component';
+import Signup from './components/SignUp-In/signup.component';
 import Details from './components/Details/Details';
 import Search from './components/Search/Search';
 import TopBar from './components/TopBar/TopBar';
@@ -35,6 +36,8 @@ function App() {
           <Route path='/score' element={<Score/>} />
           <Route path='/state' element={<AnswerState/>} />
           <Route path='/playwait' element={<PlayerWait/>} />
+          <Route path='/login' element={<Login/>} />
+          <Route path='/signup' element={<Signup/>} />
       </Routes>
     </div>
     </div>

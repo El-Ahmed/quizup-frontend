@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import './Sign.css';
+import logo from '../../assets/QUIZZUP_free-file.png';
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 export default function Login  (){
 
     const [emailValue, setemailValue] = React.useState("")
@@ -21,6 +25,13 @@ export default function Login  (){
 
         return (
             <div className="container">
+                <div className="banner">
+                <p>WELCOME TO QUIZZ UP</p>
+                <div className="logo-container">
+                <img src={logo} alt="logo"/>
+                </div>
+              
+                </div>
             <form>
                 <h3>Sign In</h3>
 
@@ -45,7 +56,10 @@ export default function Login  (){
 
                 <button type="submit" className="btn btn-primary btn-block" >Submit</button>
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                    <Link to='/signup'>
+                        Don't have an account yet ?
+                    </Link>
+                 
                 </p>
             </form>
             </div>

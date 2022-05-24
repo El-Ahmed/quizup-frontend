@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import logo from '../../assets/QUIZZUP_free-file.png';
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function SignUp ( ) {
       const [emailValue, setemailValue] = React.useState("")
@@ -35,6 +38,14 @@ export default function SignUp ( ) {
     
 
         return (
+          <div className="container">
+          <div className="banner">
+          <p>WELCOME TO QUIZZ UP</p>
+          <div className="logo-container">
+          <img src={logo} alt="logo"/>
+          </div>
+        
+          </div>
             <form>
                 <h3>Sign Up</h3>
 
@@ -60,9 +71,13 @@ export default function SignUp ( ) {
 
                 <button type="submit" className="btn btn-primary btn-block" >Sign Up</button>
                 <p className="forgot-password text-right">
-                    Already registered <a href="#">sign in?</a>
+                    Already registered   
+                    <Link to='/login'>
+                       Sign in ?
+                    </Link>
                 </p>
             </form>
+            </div>
         );
     
 }
