@@ -6,7 +6,8 @@ import './quizcard.css';
 function QuizCard() {
 
   return (
-    <Card sx={{ display: 'flex' }}>
+    <Link to='/quiz/1'>
+    <Card className="cardbox" sx={{ display: 'flex' }}>
       <CardMedia
         component="img"
         sx={{ width: 151 }}
@@ -16,7 +17,7 @@ function QuizCard() {
       <Box sx={{ display: 'flex', flexDirection: 'column' , width: '100%'}}>
 
         <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5" textAlign="left">
+          <Typography component="div" variant="h5" textAlign="left" fontWeight="bold">
             CountryQuiz
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div" textAlign="left">
@@ -25,7 +26,7 @@ function QuizCard() {
         </CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', pr: 1, pb: 1 , justifyContent: 'right'}}>
           <Link to='/quiz/1'>
-            <Button aria-label="previous">
+            <Button aria-label="previous" sx={{ fontWeight:'bold'}}>
               Details
             </Button>
           </Link>
@@ -34,6 +35,7 @@ function QuizCard() {
       </Box>
 
     </Card>
+    </Link>
 
   );
 
