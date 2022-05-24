@@ -1,0 +1,14 @@
+
+.searchList {
+    padding: 20px;
+    overflow-y: scroll;
+    height: 80vh;
+
+}
+.card {
+    padding-bottom: 10px;
+}
+.link {
+    text-align: start;
+    margin-left: 10px;
+}
