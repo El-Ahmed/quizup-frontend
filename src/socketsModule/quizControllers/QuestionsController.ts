@@ -28,4 +28,8 @@ export default class QuestionsController {
     public sendCurrentQuestion() {
         this.questionSender.sendQuestion(this.pin,this.questions[this.currentQuestionIndex].getSendingVersion());
     }
+
+    public getPin() {
+        return this.pin;
+    }
 }

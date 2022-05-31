@@ -39,11 +39,7 @@ const createCompetition = async (quiz:Quiz, playersObserver:PlayersObserver) => 
     const questionSender = new QuestionSender(webSocketSender);
     const questionsController = new QuestionsController(pin,questionSender,quiz.getQuestions());
 
-
-
-    
-
-    return [pin, questionsController];
+    return  questionsController;
 
 }
 
