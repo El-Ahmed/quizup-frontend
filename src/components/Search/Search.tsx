@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import QuizCard from "../QuizCard/QuizCard";
 
 import './search.css';
@@ -6,6 +7,13 @@ import './search.css';
 
 function Search() {
     const quizzes = [1,1,1,1,1,1]
+    useEffect(() => {
+      
+        fetch("http://localhost:8080/quizzes")
+            .then(response => response.json())
+            .then(data => console.log(data));
+    }, [])
+    
     
     return (
         <div>
