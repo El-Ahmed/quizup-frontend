@@ -5,6 +5,7 @@ import { createCompetition, nextQuestion, startCompetition } from "../../sockets
 import QuestionsController from "../../socketsModule/quizControllers/QuestionsController";
 import Question from "../../socketsModule/quizEntities/Question";
 import Quiz from "../../socketsModule/quizEntities/Quiz";
+import AnswerState from '../AnswerState/AnsweringState';
 
 
 export default function Details() {
@@ -12,6 +13,7 @@ export default function Details() {
 	const [pin, setPin] = useState('')
     const [qc, setQC] = useState<QuestionsController>()
     const [players, setPlayers] = useState<string[]>([])
+    const [questionNum, setQN] = useState(0);
 
     const playerObserver = (players:string[]) => { setPlayers(players); };
  	const quiz = new Quiz('name','desc',[new Question("test1",[]),new Question("test2",[])]);
@@ -24,20 +26,29 @@ export default function Details() {
         } );
     }
     const start = () => {
-        if (qc)
+        if (qc) {
+
         startCompetition(qc);
+		setQN(1);
+		}
+		
     }
     const next = () => {
-        if (qc)
+        if (qc) {
+
         nextQuestion(qc);
+		}
     }
 
 	useEffect(() => {
 	  host();
-	
 	}, [])
 	
 
+	if (questionNum !=0){
+		return (<AnswerState players={players}/>)
+
+	}
 	
 	return (
 		<div className='app'>
@@ -55,7 +66,7 @@ export default function Details() {
 					<div className='details'>
 						<p className='titre'>Participants:</p>
 						<p>
-							{players.map((player)=> <>{player}</>)}
+							{players.map((player)=> <>{player} </>)}
 						</p>
 					</div>
 					<div className='bouttons'>
