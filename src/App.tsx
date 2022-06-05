@@ -20,6 +20,8 @@ import Join from './components/Join/Join';
 import AnswerState from './components/AnswerState/AnswerState';
 import Score from './components/Score/Score';
 import PlayerWait from './components/PlayerWait/PlayerWait';
+import PlayerTest from './testComponents/HostTest/PlayerTest';
+import PlayerWaiting from './components/PlayerWait/PlayerWaiting';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
           <Route path='/playwait' element={<PlayerWait/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/signup' element={<Signup/>} />
+          <Route path='/playertest' element={<PlayerTest/>} />
+          <Route path='/playwaiting' element={<PlayerWaiting/>} />
       </Routes>
     </div>
     </div>

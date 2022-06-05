@@ -6,6 +6,7 @@ import QuestionsController from "../../socketsModule/quizControllers/QuestionsCo
 import Question from "../../socketsModule/quizEntities/Question";
 import Quiz from "../../socketsModule/quizEntities/Quiz";
 import AnswerState from '../AnswerState/AnsweringState';
+import Choice from '../../socketsModule/quizEntities/Choice';
 
 
 export default function Details() {
@@ -16,7 +17,7 @@ export default function Details() {
     const [questionNum, setQN] = useState(0);
 
     const playerObserver = (players:string[]) => { setPlayers(players); };
- 	const quiz = new Quiz('name','desc',[new Question("test1",[]),new Question("test2",[])]);
+ 	const quiz = new Quiz('name','desc',[new Question("test1",[new Choice(0,"testc"), new Choice(0,"testc")]),new Question("test2",[])]);
     const host = ()=> {
         createCompetition(quiz,playerObserver)
         .then(qc => {
@@ -66,7 +67,7 @@ export default function Details() {
 					<div className='details'>
 						<p className='titre'>Participants:</p>
 						<p>
-							{players.map((player)=> <>{player} </>)}
+							{players.map((player1)=> <>{player1} </>)}
 						</p>
 					</div>
 					<div className='bouttons'>

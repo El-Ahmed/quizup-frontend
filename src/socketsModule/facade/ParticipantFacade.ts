@@ -12,7 +12,7 @@ import WebSocketSender from "../websocket/WebSocketSender";
 
 
 
-const participate = (pin:string, playerName:string, participationObserver:ParticipationObserver, setId:(id:string)=>void) => {
+const participate = (pin:string, playerName:string, participationObserver:ParticipationObserver, questionObserver:QuestionObserver, setId:(id:string)=>void) => {
 
 
 
@@ -35,6 +35,8 @@ const participate = (pin:string, playerName:string, participationObserver:Partic
                 webSocketPublisher.subscribe(participationAcceptenceReceiver,"Players/"+newId+"/acceptence");
                 participationController.attendCompetition(pin,playerName)
                 setId(newId);
+                observeQuestions(questionObserver,webSocketPublisher,pin);
+
             });
     };
     const onError = (err) => {console.log(err)};

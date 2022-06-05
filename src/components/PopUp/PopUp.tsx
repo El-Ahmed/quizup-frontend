@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import './PopUp.css';
 import { Link } from "react-router-dom";
 import ParticipantFacade from "../../socketsModule/facade/ParticipantFacade";
+import Question from "../../socketsModule/quizEntities/Question";
 
 
 type popUp = {
@@ -30,11 +31,12 @@ function PopUp(props: popUp) {
     }
     const setId = (id:string) => {}
     const participationObserver = () => {}
+    const questionObserver = (question:Question) => { console.log(question.getQuestionText)}
     
     const join =() => {
       
       console.log(pin+" "+ name);
-      ParticipantFacade.participate(pin, name, participationObserver,  setId);
+      ParticipantFacade.participate(pin, name, participationObserver, questionObserver ,setId);
 
     }
     
@@ -85,9 +87,9 @@ function PopUp(props: popUp) {
             value={pin}
             onChange={writePin}
           />
-          {/* <Link to='/join'> */}
-            <Button onClick={join}>Join</Button>
-          {/* </Link> */}
+          <Link to={'/playwaiting?pin='+pin+'&name='+name}>
+            <Button onClick={handleClose} >Join</Button>
+          </Link>
           </div>
         </DialogContent>
         {/* <DialogActions> */}

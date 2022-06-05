@@ -24,7 +24,7 @@ export default function AnswerState(props:FullName) {
 						</div>
 						<div className='scores'>
 							{props.players.map((player)=> 
-								<p className='information'><p>player :</p><p>Didn't answered yet</p></p>
+								<p className='information'><p>{player} :</p><p>Didn't answered yet</p></p>
 							)}
 						
 						</div>

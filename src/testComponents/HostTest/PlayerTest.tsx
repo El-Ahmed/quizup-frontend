@@ -14,17 +14,16 @@ function PlayerTest() {
     // ParticipantFacade.participate()
     const [id, setId] = useState('')
     
+    const questionObserver = (question:Question)=> {console.log(question.getQuestionText())}
 
     const writePin = (e:FormEvent<HTMLInputElement>) => {
         setPin(e.currentTarget.value);
     }
     const participate = () => {
-        let webSocketPublisher = ParticipantFacade.participate(pin, "player", participationObserver,  setId);
+        let webSocketPublisher = ParticipantFacade.participate(pin, "player", participationObserver, questionObserver, setId);
         setWebPub(webSocketPublisher);
     }
     const getQuestion = () => {
-        if (webPub)
-        ParticipantFacade.observeQuestions((question:Question)=> {console.log(question.getQuestionText())}, webPub, pin);
     }
     
     return (
@@ -32,7 +31,6 @@ function PlayerTest() {
         <h1>player</h1>
         <input type="text" value={pin} onChange={writePin} />
         <button onClick={participate}>participate</button>
-        <button onClick={getQuestion} disabled={!participated}>get question</button>
         
         </>
     )
