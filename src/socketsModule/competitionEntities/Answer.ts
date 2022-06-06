@@ -4,8 +4,8 @@ import ScoreSender from "../senders/ScoreSender";
 export default class Answer {
     private question:Question;
     private answerText:string;
-    private answerDate:Date;
-    constructor(question:Question, answerText:string, answerDate:Date) {
+    private answerDate:number;
+    constructor(question:Question, answerText:string, answerDate:number) {
         this.question = question;
         this.answerText=answerText;
         this.answerDate = answerDate;

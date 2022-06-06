@@ -11,8 +11,8 @@ export default class AnswerSender {
         this.webSocketSender = webSocketSender;
     }
 
-    public sendAnswer(playerId:string, answerText:string) {
-        this.webSocketSender.sendMessage("Players/"+playerId+"/answer",{answerText:answerText})
+    public sendAnswer(pin:string ,playerId:string, answerText:string) {
+        this.webSocketSender.sendMessage("Quiz/"+pin+"/answer",{playerId: playerId,answerText:answerText})
     }
 
 }

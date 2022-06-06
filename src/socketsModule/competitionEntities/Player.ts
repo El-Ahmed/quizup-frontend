@@ -1,3 +1,4 @@
+import Question from "../quizEntities/Question";
 import Answer from "./Answer";
 import Score from "./Score";
 
@@ -17,8 +18,8 @@ export default class Player {
     public getName():string {
         return this.name;
     }
-    public addAnswer(answerJson) {
-        //TODO
+    public addAnswer(currentQuestion:Question, answerJson) {
+        this.answers.push(new Answer(currentQuestion, answerJson.answerText, Date.now()))
 
     }
     public getScore():Score {

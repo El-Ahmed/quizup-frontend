@@ -1,3 +1,4 @@
+import Question from "../quizEntities/Question";
 import Quiz from "../quizEntities/Quiz";
 import Player from "./Player";
 
@@ -37,5 +38,15 @@ export default class Competition {
 
     public getName():string {
         return this.name;
+    }
+    
+    public addAnswer = (playerId:string, answerJson, currentQuestion: Question) => {
+        this.players.forEach(player => {
+            if(player.getPlayerId() == playerId) {
+                player.addAnswer(currentQuestion,answerJson);
+                return;
+            }
+        });
+
     }
 }
