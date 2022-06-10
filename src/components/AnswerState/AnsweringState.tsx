@@ -31,7 +31,7 @@ export default function AnswerState(props:FullName) {
 					</div>				
 					<div className='bouttons'>
 						<Link to='/score'>
-							<button  className="play">Show question</button>
+							<button  className="play">Show scores</button>
 						</Link>
 					</div>
 
