@@ -33,12 +33,7 @@ function PopUp(props: popUp) {
     const participationObserver = () => {}
     const questionObserver = (question:Question) => { console.log(question.getQuestionText)}
     
-    const join =() => {
-      
-      console.log(pin+" "+ name);
-      ParticipantFacade.participate(pin, name, participationObserver, questionObserver ,setId);
-
-    }
+   
     
     return (
         <div className="popUp">

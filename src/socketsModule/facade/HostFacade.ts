@@ -8,21 +8,25 @@ import Quiz from "../quizEntities/Quiz";
 import ParticipationReceiver from "../receivers/ParticipationReceiver";
 import ParticipationAcceptenceSender from "../senders/ParticipationAcceptenceSender";
 import QuestionSender from "../senders/QuestionSender";
+import ScoreSender from "../senders/ScoreSender";
 import WebSocketPublisher from "../websocket/WebSocketPublisher";
 import WebSocketSender from "../websocket/WebSocketSender";
 
 
 // need to call competitionController.host to get the pin
-const createCompetition = async (quiz:Quiz, playersObserver:PlayersObserver) => {
-    const competition = new Competition(quiz.getName(),quiz,playersObserver);
-    const competitionController = new CompetitionController(new PinGenerator(),competition);
+const createCompetition  =  async (quiz:Quiz, playersObserver:PlayersObserver) => {
 
-    const pin = await competitionController.hostCompetition();
     
     const stompClient = Stomp.over(new SockJS("http://localhost:8080/ws"));
     const webSocketPublisher = new WebSocketPublisher(stompClient);
     const webSocketSender = new WebSocketSender(stompClient);
     const participationAcceptenceSender = new ParticipationAcceptenceSender(webSocketSender);
+    const scoreSender = new ScoreSender(webSocketSender);
+
+    const competition = new Competition(quiz.getName(),quiz,playersObserver);
+    const competitionController = new CompetitionController(new PinGenerator(),competition, scoreSender);
+    const pin = await competitionController.hostCompetition();
+
     const participationReceiver = new ParticipationReceiver(competitionController, participationAcceptenceSender);
 
 
@@ -38,8 +42,9 @@ const createCompetition = async (quiz:Quiz, playersObserver:PlayersObserver) => 
 
     const questionSender = new QuestionSender(webSocketSender);
     const questionsController = new QuestionsController(pin,questionSender,quiz.getQuestions());
+    competitionController.setQuestionController(questionsController);
 
-    return  questionsController;
+    return  competitionController;
 
 }
 

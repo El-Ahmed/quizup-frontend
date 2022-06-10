@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
+import AnsweringController from '../../socketsModule/playingControllers/AnsweringController';
+import Choice from '../../socketsModule/quizEntities/Choice';
 import Question from '../../socketsModule/quizEntities/Question';
 import './Question.css';
 
 interface Quest {
-	question: Question
+	question: Question,
+	answeringController: AnsweringController,
+	pin:string,
+	playerId:string
 }
-export default function Question1({question}: Quest) {
+export default function Question1({question, answeringController, pin, playerId}: Quest) {
 	
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
@@ -20,6 +25,9 @@ export default function Question1({question}: Quest) {
 	const handleAnswerOptionClick = (isCorrect) => {
 	
 	};
+	const choseAnswer = (choice:Choice) => {
+		answeringController.answer(choice,pin,playerId);
+	}
 	return (
 		<div className='app'>
 				<>
@@ -31,7 +39,7 @@ export default function Question1({question}: Quest) {
 					</div> */}
 					<div className='answer-section'>
 						{question.getChoices().map((choice) => (
-							<button  onClick={() => {}}>{choice.getText()}</button>
+							<button  onClick={()=>choseAnswer(choice)}>{choice.getText()}</button>
 						))}
 					</div>
 				</>

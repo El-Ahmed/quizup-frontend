@@ -15,7 +15,7 @@ export default class Choice {
     public getScore():number {
         return this.score;
     }
-    public getText():string {
+    public getText = () => {
         return this.text;
     }
 

@@ -8,8 +8,11 @@ import QuestionReceiver from "../receivers/QuestionReceiver";
 import ParticipationSender from "../senders/ParticipationSender";
 import WebSocketPublisher from "../websocket/WebSocketPublisher";
 import WebSocketSender from "../websocket/WebSocketSender";
+import AnsweringController from "../playingControllers/AnsweringController";
+import AnswerSender from "../senders/AnswerSender";
+import Choice from "../quizEntities/Choice";
 
-
+type AnswerSenderSetter = (answerSender: (choice:Choice) => void) => void;
 
 
 const participate = (pin:string, playerName:string, participationObserver:ParticipationObserver, questionObserver:QuestionObserver, setId:(id:string)=>void) => {
@@ -24,6 +27,9 @@ const participate = (pin:string, playerName:string, participationObserver:Partic
     const webSocketPublisher = new WebSocketPublisher(stompClient);
     const participationAcceptenceReceiver = new ParticipationAcceptenceReceiver(participationController);
 
+    
+
+
 
 
 
@@ -36,13 +42,15 @@ const participate = (pin:string, playerName:string, participationObserver:Partic
                 participationController.attendCompetition(pin,playerName)
                 setId(newId);
                 observeQuestions(questionObserver,webSocketPublisher,pin);
-
             });
     };
     const onError = (err) => {console.log(err)};
     stompClient.connect({}, onConnected, onError);
     
-    return webSocketPublisher;
+    const answerSender = new AnswerSender(webSocketSender);
+    const answeringController = new AnsweringController(answerSender); 
+    return answeringController;
+
 
 }
 const observeQuestions = (questionObserver:QuestionObserver, webSocketPublisher:WebSocketPublisher, pin:string) => {
@@ -56,5 +64,14 @@ const observeQuestions = (questionObserver:QuestionObserver, webSocketPublisher:
     
 }
 
+// const getAnswersender = (playerId:string, webSocketSender:WebSocketSender, pin) => {
+
+//     const answerSender = new AnswerSender(webSocketSender);
+//     const answeringController = new AnsweringController(playerId,answerSender); 
+//     const sendAnswer = (choice:Choice) => {
+//         answeringController.answer(choice,pin);
+//     }
+//     return sendAnswer;
+// }
 
 export default {participate, observeQuestions};

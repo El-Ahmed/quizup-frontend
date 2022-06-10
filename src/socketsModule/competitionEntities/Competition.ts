@@ -1,7 +1,7 @@
 import Question from "../quizEntities/Question";
 import Quiz from "../quizEntities/Quiz";
 import Player from "./Player";
-
+import Score from "./Score";
 
 export type PlayersObserver = (players:string[]) => void;
 
@@ -48,5 +48,12 @@ export default class Competition {
             }
         });
 
+    }
+    public getScores = () => {
+        let scores:Score[] = [];
+        this.players.forEach(player => {
+            scores.push(player.getScore());
+        })
+        return scores;
     }
 }

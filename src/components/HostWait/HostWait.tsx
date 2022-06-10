@@ -20,15 +20,14 @@ export default function Details() {
  	const quiz = new Quiz('name','desc',[new Question("test1",[new Choice(0,"testc"), new Choice(0,"testc")]),new Question("test2",[])]);
     const host = ()=> {
         createCompetition(quiz,playerObserver)
-        .then(qc => {
-            setQC(qc);
+        .then(cc => {
+            setQC(cc.getQuestionController());
+			if (qc)
             setPin(qc.getPin())
-            
         } );
     }
     const start = () => {
         if (qc) {
-
         startCompetition(qc);
 		setQN(1);
 		}
@@ -44,6 +43,10 @@ export default function Details() {
 	useEffect(() => {
 	  host();
 	}, [])
+	useEffect(() => {
+		if (qc)
+		setPin(qc?.getPin());
+	}, [qc])
 	
 
 	if (questionNum !=0){

@@ -15,10 +15,10 @@ function HostTest() {
     const quiz = new Quiz('name','desc',[new Question("test1",[]),new Question("test2",[])]);
     const host = ()=> {
         createCompetition(quiz,playerObserver)
-        .then(qc => {
-            setQC(qc);
+        .then(cc => {
+            setQC(cc.getQuestionController());
+            if (qc)
             setPin(qc.getPin())
-            
         } );
     }
     const start = () => {
