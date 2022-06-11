@@ -17,7 +17,7 @@ export default function Details() {
     const [questionNum, setQN] = useState(0);
 
     const playerObserver = (players:string[]) => { setPlayers(players); };
- 	const quiz = new Quiz('name','desc',[new Question("test1",[new Choice(0,"testc"), new Choice(0,"testc")]),new Question("test2",[])]);
+ 	const quiz = new Quiz('name','desc',[new Question("test1",[new Choice(0,"wrong"), new Choice(1,"right")]),new Question("test2",[])]);
     const host = ()=> {
         createCompetition(quiz,playerObserver)
         .then(cc => {
