@@ -28,7 +28,7 @@ export default function PlayerWaiting() {
 	const [accepted, setAccepted] = useState(false);
 	const [ready, setReady] = useState(false);
     const questionObserver = (question:Question)=> {setCurrentQuestion(question)}
-	const participationObserver = () => {setAccepted(true)};
+	const participationObserver = (id:string) => {setAccepted(true); setId(id)};
 
 	const [answerController,setAnswerController] = useState<AnsweringController>();
 	const [sendAnswer,setAnswerSender] = useState<(choice:Choice)=>void>();
@@ -39,9 +39,14 @@ export default function PlayerWaiting() {
 	// 	console.log(sendAnswer);
 	// }
     
+	const setId2 = (newId:string) => {
+		if (!id)
+			setId(newId)
+
+	}
 	useEffect(() => {
 		if (pin && name) {
-       		setAnswerController(ParticipantFacade.participate(pin, name, participationObserver, questionObserver, setId));
+       		setAnswerController(ParticipantFacade.participate(pin, name, participationObserver, questionObserver, setId2));
 			
 		}
 	}, [pin,name]);

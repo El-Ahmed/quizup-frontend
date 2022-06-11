@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Player from '../../socketsModule/competitionEntities/Player';
+import Question from '../../socketsModule/quizEntities/Question';
 import './AnswerState.css' ;
 
-interface FullName {
-    players: string[];
+export type PlayerAnswered = {
+	playername: string,
+	answered: boolean
+}
+interface Iprops {
+    players: Player[];
+    currentQuestion?: Question;
+    counter: number;
+	playerAnswered:PlayerAnswered[]
 }
 
 
-export default function AnswerState(props:FullName) {
+export default function AnswerState(props:Iprops) {
 
+	
+	
+	const checkAnswer = (player:Player) => {
+		if (props.currentQuestion && player.didAnswer(props.currentQuestion))
+			return "did answer";
+		return "didn't answer yet"
+	}
+	const didAnswer = (answred:boolean) => {
+		if (answred) 
+			return "did answer";
+		return "didn't answer yet"
+	}
 	
 	return (
 		<div className='score-wrapper'>
@@ -23,8 +44,8 @@ export default function AnswerState(props:FullName) {
                             <div className='question-text'><p>Question</p></div>
 						</div>
 						<div className='scores'>
-							{props.players.map((player)=> 
-								<p className='information'><p>{player} :</p><p>Didn't answered yet</p></p>
+							{props.playerAnswered.map((player)=> 
+								<p className='information'><p>{player.playername} :</p><p>{didAnswer(player.answered)}</p></p>
 							)}
 						
 						</div>

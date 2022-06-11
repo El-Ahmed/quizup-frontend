@@ -2,7 +2,7 @@ import IdGenerator from "../generators/IdGenerator";
 import ParticipationSender from "../senders/ParticipationSender";
 
 
-export type ParticipationObserver = () => void; 
+export type ParticipationObserver = (id) => void; 
 
 export default class ParticipationController {
 
@@ -17,8 +17,11 @@ export default class ParticipationController {
         this.idGenerator = idGenerator;
         this.participationObserver = participationObserver;
     }
-    public async generateId():Promise<string> {
+    public async generateId():Promise<string|undefined> {
+        if (this.playerId)
+            return this.playerId;
         this.playerId = await this.idGenerator.getId();
+        
         return this.playerId;
     }
 
@@ -30,11 +33,18 @@ export default class ParticipationController {
     
     public setCompetitionName(competitionName) {
         this.competitionName = competitionName
-        this.participationObserver();
     }
     public getCompetitionName():string|undefined {
         return this.competitionName;
     }
 
+
+    public getPlayerId = () => this.playerId;
+
+    public setPlayerId = (id:string) =>{
+        this.playerId = id;
+        this.participationObserver(id);
+
+    }
 
 }

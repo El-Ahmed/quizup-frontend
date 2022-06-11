@@ -13,7 +13,8 @@ export default class AnswerReceiver implements IWebSocketSubscriber {
     }
 
     public receiveAnswer(answerJson) {
-        this.competitionController.addAnswer(answerJson,answerJson.playerId);
+        let answer =JSON.parse(answerJson.body);
+        this.competitionController.addAnswer(answer,answer.playerId);
     }
 
 }

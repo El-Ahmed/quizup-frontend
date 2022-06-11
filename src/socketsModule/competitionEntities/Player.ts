@@ -19,6 +19,8 @@ export default class Player {
         return this.name;
     }
     public addAnswer(currentQuestion:Question, answerJson) {
+        console.log("addin answering");
+        if (!this.didAnswer(currentQuestion))
         this.answers.push(new Answer(currentQuestion, answerJson.answerText, Date.now()))
 
     }
@@ -29,4 +31,18 @@ export default class Player {
         });
         return {playerId:this.playerId, score:score};
     }
+    public didAnswer = (question:Question) => {
+        console.log("checking answering");
+        console.log(this.answers);
+        let answered= false;
+
+        this.answers.forEach(answer => {
+            if (answer.getQuestion().getQuestionText() == question.getQuestionText()) {
+                console.log("this should return true");
+                answered= true;
+            }
+        });
+        console.log("this should return false");
+        return answered;
+    } 
 }

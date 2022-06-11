@@ -13,4 +13,8 @@ export default class Answer {
     public getScore():number {
         return this.question.getAnswerScore(this.answerText);
     }
+    public getQuestion = () => {
+        return this.question;
+
+    }
 }

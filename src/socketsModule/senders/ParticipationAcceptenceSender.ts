@@ -12,7 +12,7 @@ export default class ParticipationAcceptenceSender {
     }
 
     public sendAcceptence(playerId:string, competitionName:string) {
-        this.webSocketSender.sendMessage("Players/"+playerId+"/acceptence",{competitionName:competitionName})
+        this.webSocketSender.sendMessage("Players/"+playerId+"/acceptence",{competitionName:competitionName, playerId:playerId})
     }
 
 }

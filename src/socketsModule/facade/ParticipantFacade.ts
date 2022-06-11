@@ -34,15 +34,14 @@ const participate = (pin:string, playerName:string, participationObserver:Partic
 
 
 
-    const onConnected = () => {
+    const onConnected = async () => {
         
-        participationController.generateId()
-            .then(newId => { 
+        const newId = await participationController.generateId();
+        if (!newId) return;
                 webSocketPublisher.subscribe(participationAcceptenceReceiver,"Players/"+newId+"/acceptence");
                 participationController.attendCompetition(pin,playerName)
                 setId(newId);
                 observeQuestions(questionObserver,webSocketPublisher,pin);
-            });
     };
     const onError = (err) => {console.log(err)};
     stompClient.connect({}, onConnected, onError);

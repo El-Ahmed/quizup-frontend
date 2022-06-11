@@ -13,6 +13,7 @@ export default class CompetitionController {
     private pin?:string;
 
 
+
     private pinGenerator:PinGenerator;
     constructor(pinGenerator:PinGenerator, competition:Competition, scoreSender:ScoreSender) {
         this.pinGenerator = pinGenerator;

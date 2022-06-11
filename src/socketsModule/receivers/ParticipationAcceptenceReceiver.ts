@@ -15,6 +15,7 @@ export default class ParticipationAcceptenceReceiver implements IWebSocketSubscr
 
     public receiveParticipationAcceptence(participationAcceptenceJson) {
         this.participationController.setCompetitionName(JSON.parse(participationAcceptenceJson.body).competitionName);
+        this.participationController.setPlayerId(JSON.parse(participationAcceptenceJson.body).playerId);
         
     }
 

@@ -3,7 +3,7 @@ import Quiz from "../quizEntities/Quiz";
 import Player from "./Player";
 import Score from "./Score";
 
-export type PlayersObserver = (players:string[]) => void;
+export type PlayersObserver = (players:Player[], question?:Question) => void;
 
 export default class Competition {
     private name:string;
@@ -25,7 +25,7 @@ export default class Competition {
             throw Error("name already exist");
         
         this.players.push(new Player(Json.playerId,Json.playerName));
-        this.playersObserver(this.getPlayersNames());
+        this.playersObserver(this.players, );
     }
 
     public getPlayersNames():string[] {
@@ -42,8 +42,12 @@ export default class Competition {
     
     public addAnswer = (playerId:string, answerJson, currentQuestion: Question) => {
         this.players.forEach(player => {
+            console.log(player.getPlayerId() +"  " + playerId)
             if(player.getPlayerId() == playerId) {
+                console.log(player.getPlayerId() +"  " + playerId + " nice ")
+                this.playersObserver(this.players, currentQuestion );
                 player.addAnswer(currentQuestion,answerJson);
+                this.playersObserver(this.players, currentQuestion );
                 return;
             }
         });

@@ -5,6 +5,7 @@ import Competition, { PlayersObserver } from "../competitionEntities/Competition
 import PinGenerator from "../generators/PinGenerator";
 import QuestionsController from "../quizControllers/QuestionsController";
 import Quiz from "../quizEntities/Quiz";
+import AnswerReceiver from "../receivers/AnswerReceiver";
 import ParticipationReceiver from "../receivers/ParticipationReceiver";
 import ParticipationAcceptenceSender from "../senders/ParticipationAcceptenceSender";
 import QuestionSender from "../senders/QuestionSender";
@@ -28,11 +29,13 @@ const createCompetition  =  async (quiz:Quiz, playersObserver:PlayersObserver) =
     const pin = await competitionController.hostCompetition();
 
     const participationReceiver = new ParticipationReceiver(competitionController, participationAcceptenceSender);
+    const answerReceiver = new AnswerReceiver(competitionController);
 
 
     // subscribe to websocket waiting for player participation
     const onConnected = () => {
         webSocketPublisher.subscribe(participationReceiver,"Quiz/"+pin+"/connect");
+        webSocketPublisher.subscribe(answerReceiver,"Quiz/"+pin+"/answer");
     };
     const onError = (err) => {console.log(err)};
     stompClient.connect({}, onConnected, onError);

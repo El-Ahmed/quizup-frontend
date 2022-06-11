@@ -27,6 +27,7 @@ export default function Question1({question, answeringController, pin, playerId}
 	};
 	const choseAnswer = (choice:Choice) => {
 		answeringController.answer(choice,pin,playerId);
+		console.log("player Id when answering " + playerId);
 	}
 	return (
 		<div className='app'>
