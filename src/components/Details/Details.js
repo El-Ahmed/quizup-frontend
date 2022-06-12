@@ -1,51 +1,59 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import generateQuiz from '../../socketsModule/facade/FactoryFacade';
+import Quiz from '../../socketsModule/quizEntities/Quiz';
 import './Details.css' ;
 
 export default function Details() {
-	
-	const [counter, setCounter] = useState(15);
 
-	React.useEffect(() => {
-		const timer =
-		counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-		return () => clearInterval(timer);
-	  }, [counter]);
+	
+	// const [counter, setCounter] = useState(15);
+
+	// React.useEffect(() => {
+	// 	const timer =
+	// 	counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+	// 	return () => clearInterval(timer);
+	//   }, [counter]);
+
+	const [quiz, setQuiz] =useState();
+	const { id } = useParams();
+	useEffect(() => {
+		fetch("http://localhost:8080/quiz?id="+id)
+            .then(response => response.json())
+            .then(data => {setQuiz(generateQuiz(data)); console.log(data);});
+	}, [id])
+	
+
 
 	
 	return (
 		<div className='details-app'>
 					<div className='theme'>
-							Movies / Chernobyl			
+							{!!quiz && quiz.getName()}			
 					</div>
 					<div className='quizz-card'>
 						<div className='image-container'>
-							<img className='image' src="https://static.hbo.com/content/dam/hbodata/series/chernobyl/key-art/chernobyl-ka-1920.jpg" alt="paris"/>
+							<img className='image' src="https://st2.depositphotos.com/1032749/7119/v/600/depositphotos_71194851-stock-illustration-quiz-speech-bubble-icon.jpg" alt="paris"/>
 						</div>
 						<div className='quizz-informations'>
 							<p className='information-1'>
-								<p>Date :</p>
-								<p>Time per question :</p>
 								<p>Questions :</p>
-								<p>Points :</p>
+								<p>Time per question :</p>
 							</p>
 							<p className='information-2'>
-								<p>23 / 05 / 2022</p>
-								<p>20 s</p>
-								<p>14</p
-								><p>200</p>
+								<p>{!!quiz && quiz.getQuestions().length}</p>
+								<p>15 s</p>
 							</p>
 						</div>
 					</div>				
 					<div className='details'>
 						<p className='titre'>Details</p>
-						<p> The Chernobyl disaster was a nuclear accident that occurred on 26 April 1986 at the No.
-							4 reactor in the Chernobyl Nuclear Power Plant, near the city of Pripyat in the north of the Ukrainian SSR in the Soviet Union.
-							It is considered the worst nuclear disaster in history both in cost and casualties
+						<p> 
+							{!!quiz && quiz.getDescription()}
 						</p>
 					</div>
 					<div className='bouttons'>
-						<Link to='/host'>
+						<Link to={'/host/'+id}>
 							<button  className="host">Host</button>
 						</Link>
 						<Link to='/play'>
