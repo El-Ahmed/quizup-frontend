@@ -24,6 +24,7 @@ export default function Details() {
 	const [showingScores, setShowingScores] = useState(false);
 	const [finished, setfinished] = useState(false);
 
+
     const playerObserver = (players:Player[], question?:Question) => {
 		setPlayers(players); console.log("change happended");
 		console.log(question);
@@ -69,6 +70,15 @@ export default function Details() {
 	const showScores = () => {
 		competitionController?.sendScores();
 		setShowingScores(true);
+		let playernans:PlayerAnswered[] = [];
+		players.map((player) => {
+			let playernan:PlayerAnswered = {
+				playername: player.getName(),
+				answered:  false
+			}
+			playernans.push(playernan);
+		})
+		setPlayersNans(playernans);
 	}
 
 	useEffect(() => {
