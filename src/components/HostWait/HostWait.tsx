@@ -16,7 +16,7 @@ export default function Details() {
 	const [pin, setPin] = useState('')
     const [qc, setQC] = useState<QuestionsController>()
     const [players, setPlayers] = useState<Player[]>([])
-    const [questionNum, setQN] = useState(1);
+    const [questionNum, setQN] = useState(0);
     const [counter, setCounter] = useState(0);
 	const [playersNans, setPlayersNans] = useState<PlayerAnswered[]>([])
 
