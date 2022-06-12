@@ -9,6 +9,7 @@ import AnswerState , {PlayerAnswered} from '../AnswerState/AnsweringState';
 import Choice from '../../socketsModule/quizEntities/Choice';
 import Player from '../../socketsModule/competitionEntities/Player';
 import CompetitionController from '../../socketsModule/competitionControllers/CompetitionController';
+import Scores from '../Score/Scores';
 
 
 
@@ -20,6 +21,7 @@ export default function Details() {
     const [questionNum, setQN] = useState(0);
     const [competitionController, setCC] = useState<CompetitionController>();
 	const [playersNans, setPlayersNans] = useState<PlayerAnswered[]>([])
+	const [showingScores, setShowingScores] = useState(false);
 
     const playerObserver = (players:Player[], question?:Question) => {
 		setPlayers(players); console.log("change happended");
@@ -63,6 +65,7 @@ export default function Details() {
     }
 	const showScores = () => {
 		competitionController?.sendScores();
+		setShowingScores(true);
 	}
 
 	useEffect(() => {
@@ -74,10 +77,12 @@ export default function Details() {
 	}, [qc])
 	
 	//if(!qc) return <>sad</>;
+	if (showingScores) {
+		return (<Scores players={players} questionNumber={questionNum}></Scores>);
+	}
 
 	if (questionNum !=0){
 		return (<AnswerState players={players} playerAnswered={playersNans} currentQuestion={qc?.getCurrentQuestion()} questionNumber={questionNum} showScores={showScores}/>)
-
 	}
 	
 	return (
