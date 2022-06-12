@@ -11,7 +11,7 @@ export type PlayerAnswered = {
 interface Iprops {
     players: Player[];
     currentQuestion?: Question;
-    counter: number;
+    questionNumber: number;
 	playerAnswered:PlayerAnswered[]
 }
 
@@ -34,14 +34,14 @@ export default function AnswerState(props:Iprops) {
 	return (
 		<div className='score-wrapper'>
 					<div className='theme'>
-							Movies / Chernobyl			
+							Quiz Hosting			
 					</div>
 					<div className='score-container'>
 						<div className='score-title'>
                             <div className='question-count'>
-                                <span>Question 1 / 15 </span>
+                                <span>Question { props.questionNumber} </span>
                             </div>
-                            <div className='question-text'><p>Question</p></div>
+                            <div className='question-text'><p>{props.currentQuestion?.getQuestionText()}</p></div>
 						</div>
 						<div className='scores'>
 							{props.playerAnswered.map((player)=> 

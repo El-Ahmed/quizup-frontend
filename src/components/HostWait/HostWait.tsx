@@ -16,7 +16,7 @@ export default function Details() {
 	const [pin, setPin] = useState('')
     const [qc, setQC] = useState<QuestionsController>()
     const [players, setPlayers] = useState<Player[]>([])
-    const [questionNum, setQN] = useState(0);
+    const [questionNum, setQN] = useState(1);
     const [counter, setCounter] = useState(0);
 	const [playersNans, setPlayersNans] = useState<PlayerAnswered[]>([])
 
@@ -56,6 +56,7 @@ export default function Details() {
         if (qc) {
 
         nextQuestion(qc);
+		setQN(questionNum+1);
 		}
     }
 
@@ -70,7 +71,7 @@ export default function Details() {
 	if(!qc) return <>sad</>;
 
 	if (questionNum !=0){
-		return (<AnswerState players={players} playerAnswered= {playersNans} currentQuestion={qc?.getCurrentQuestion()} counter = {counter}/>)
+		return (<AnswerState players={players} playerAnswered= {playersNans} currentQuestion={qc?.getCurrentQuestion()} questionNumber = {questionNum}/>)
 
 	}
 	
