@@ -1,45 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Question.css';
+import { useParams } from 'react-router-dom';
+import generateQuiz from '../../socketsModule/facade/FactoryFacade';
 
 export default function Question() {
-	const questions = [
-		{
-			questionText: 'What is the capital of France?',
-			answerOptions: [
-				{ answerText: 'New York', isCorrect: false },
-				{ answerText: 'London', isCorrect: false },
-				{ answerText: 'Paris', isCorrect: true },
-				{ answerText: 'Dublin', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'Who is CEO of Tesla?',
-			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: true },
-				{ answerText: 'Bill Gates', isCorrect: false },
-				{ answerText: 'Tony Stark', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'The iPhone was created by which company?',
-			answerOptions: [
-				{ answerText: 'Apple', isCorrect: true },
-				{ answerText: 'Intel', isCorrect: false },
-				{ answerText: 'Amazon', isCorrect: false },
-				{ answerText: 'Microsoft', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'How many Harry Potter books are there?',
-			answerOptions: [
-				{ answerText: '1', isCorrect: false },
-				{ answerText: '4', isCorrect: false },
-				{ answerText: '6', isCorrect: false },
-				{ answerText: '7', isCorrect: true },
-			],
-		},
-	];
+	const [quiz, setQuiz] =useState();
+	const [questions, setQuestions] =useState();
+	const { id } = useParams();
+	useEffect(() => {
+		fetch("http://localhost:8080/quiz?id="+id)
+            .then(response => response.json())
+            .then(data => {
+				console.log(data);
+				const q = generateQuiz(data);
+				setQuiz(q)
+				setQuestions(q.getQuestions());
+			});
+	}, [id])
+
+
+	// const questions = [
+	// 	{
+	// 		questionText: 'What is the capital of France?',
+	// 		answerOptions: [
+	// 			{ answerText: 'New York', isCorrect: false },
+	// 			{ answerText: 'London', isCorrect: false },
+	// 			{ answerText: 'Paris', isCorrect: true },
+	// 			{ answerText: 'Dublin', isCorrect: false },
+	// 		],
+	// 	},
+	// 	{
+	// 		questionText: 'Who is CEO of Tesla?',
+	// 		answerOptions: [
+	// 			{ answerText: 'Jeff Bezos', isCorrect: false },
+	// 			{ answerText: 'Elon Musk', isCorrect: true },
+	// 			{ answerText: 'Bill Gates', isCorrect: false },
+	// 			{ answerText: 'Tony Stark', isCorrect: false },
+	// 		],
+	// 	},
+	// 	{
+	// 		questionText: 'The iPhone was created by which company?',
+	// 		answerOptions: [
+	// 			{ answerText: 'Apple', isCorrect: true },
+	// 			{ answerText: 'Intel', isCorrect: false },
+	// 			{ answerText: 'Amazon', isCorrect: false },
+	// 			{ answerText: 'Microsoft', isCorrect: false },
+	// 		],
+	// 	},
+	// 	{
+	// 		questionText: 'How many Harry Potter books are there?',
+	// 		answerOptions: [
+	// 			{ answerText: '1', isCorrect: false },
+	// 			{ answerText: '4', isCorrect: false },
+	// 			{ answerText: '6', isCorrect: false },
+	// 			{ answerText: '7', isCorrect: true },
+	// 		],
+	// 	},
+	// ];
 
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [showScore, setShowScore] = useState(false);
@@ -49,6 +66,7 @@ export default function Question() {
 	React.useEffect(() => {
 		const timer =
 		counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+		if(counter==0) handleAnswerOptionClick(false)
 		return () => clearInterval(timer);
 	  }, [counter]);
 
@@ -56,6 +74,7 @@ export default function Question() {
 		if (isCorrect) {
 			setScore(score + 1);
 		}
+		setCounter(15);
 
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
@@ -64,6 +83,8 @@ export default function Question() {
 			setShowScore(true);
 		}
 	};
+	if (!questions)
+		return (<></>);
 	return (
 		<div className='app'>
 			{showScore ? (
@@ -76,17 +97,15 @@ export default function Question() {
 						<div className='question-count'>
 							<span>Question {currentQuestion + 1} / {questions.length} </span>
 						</div>
-						<div className='question-text'><p>{questions[currentQuestion].questionText}</p></div>
 						<div className="timer">
 							<div>Countdown: <span className="dot">{counter}</span></div>
 						</div>
-					</div>
-					<div className='image-container'>
-					<img src="https://www.museos.com/wp-content/uploads/2021/02/Eiffelturm-Paris6-scaled.jpg" alt="paris"/>
+						<br/>
+						<div className='question-text'><p>{questions[currentQuestion].question}</p></div>
 					</div>
 					<div className='answer-section'>
-						{questions[currentQuestion].answerOptions.map((answerOption) => (
-							<button  onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>{answerOption.answerText}</button>
+						{questions[currentQuestion].choices.map((choice) => (
+							<button  onClick={() => handleAnswerOptionClick(choice.score!=0)}>{choice.text}</button>
 						))}
 					</div>
 				</>

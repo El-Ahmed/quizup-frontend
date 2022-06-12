@@ -56,7 +56,7 @@ export default function Details() {
 						<Link to={'/host/'+id}>
 							<button  className="host">Host</button>
 						</Link>
-						<Link to='/play'>
+						<Link to={'/play/'+id}>
 							<button  className="play">Play</button>
 						</Link>
 					</div>

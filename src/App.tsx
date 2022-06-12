@@ -33,7 +33,7 @@ function App() {
       <Routes>
           <Route path='/' element={<Search/>}></Route>
           <Route path='/quiz/:id' element={<Details/>}></Route>
-          <Route path='/play' element={<Question/>} />
+          <Route path='/play/:id' element={<Question/>} />
           <Route path='/host/:id' element={<HostWait/>} />
           <Route path='/join' element={<Join/>} />
           <Route path='/score' element={<Score/>} />
