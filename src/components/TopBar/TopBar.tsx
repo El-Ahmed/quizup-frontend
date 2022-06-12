@@ -3,6 +3,8 @@ import { join } from 'path';
 import React, { FC, useEffect, useState } from 'react';
 import PopUp from '../PopUp/PopUp';
 import './TopBar.css'
+import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 type topBar = {
     join: Function,
@@ -13,7 +15,33 @@ function TopBar () {
     const join = () => {
         setJoining(true);
     }
+    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    useEffect(() => {
+        const mc = searchParams.get("motcle")
+        if (mc)
+        setMotcle(mc);
+    },[searchParams.get("motcle")])
+    
+
+    const [motcle, setMotcle] = useState("");
+
+    const getQuizzes =()=>{
+        // navigate("search?motcle=" + encodeURIComponent(motcle.split(" ").join(",")))
+        navigate("search?motcle=" + encodeURIComponent(motcle))
+
+    }
    
+    const onTextChange = (e) => {
+        setMotcle(e.target.value);
+    }
+
+    const search= (e)=> {
+        if(e.keyCode === 13) {
+            getQuizzes();
+        }
+    }
 
     return (
         <div className='topBar' onClick={()=>{}}>
@@ -25,6 +53,9 @@ function TopBar () {
                 label="Search"
                 margin='none'
                 size="small" 
+                value={motcle}
+                onChange={onTextChange}
+                onKeyUp = {search}
             />
  
             </div>

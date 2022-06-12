@@ -32,6 +32,7 @@ function App() {
       <TopBar/>
       <Routes>
           <Route path='/' element={<Search/>}></Route>
+          <Route path='/search' element={<Search/>}></Route>
           <Route path='/quiz/:id' element={<Details/>}></Route>
           <Route path='/play/:id' element={<Question/>} />
           <Route path='/host/:id' element={<HostWait/>} />

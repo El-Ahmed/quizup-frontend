@@ -117,7 +117,7 @@ export default function Details() {
 					</div>
 					<div className='quizz-card'>
 						<div className='image-container'>
-							<img className='image' src="https://static.hbo.com/content/dam/hbodata/series/chernobyl/key-art/chernobyl-ka-1920.jpg" alt="paris"/>
+							<img className='image' src="https://st2.depositphotos.com/1032749/7119/v/600/depositphotos_71194851-stock-illustration-quiz-speech-bubble-icon.jpg" alt="paris"/>
 						</div>
 						<div className='quizz-informations'>
 							<h2>Code: {pin}</h2>
