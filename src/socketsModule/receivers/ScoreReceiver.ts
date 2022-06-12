@@ -13,7 +13,7 @@ export default class ScoreReceiver implements IWebSocketSubscriber {
     }
 
     public receiveScore(scoreJson) {
-        this.scoreController.setScore(scoreJson.score);
+        this.scoreController.setScore(JSON.parse(scoreJson.body).score);
     }
 
 }

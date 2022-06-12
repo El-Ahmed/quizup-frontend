@@ -17,12 +17,14 @@ function PlayerTest() {
     
 	const [sendAnswer,setAnswerSender] = useState<(choice:Choice) => void>();
     const questionObserver = (question:Question)=> {console.log(question.getQuestionText())}
+    const scoreObserver = (score:number)=> {console.log(score)}
 
     const writePin = (e:FormEvent<HTMLInputElement>) => {
         setPin(e.currentTarget.value);
     }
+    
     const participate = () => {
-        ParticipantFacade.participate(pin, "player", participationObserver, questionObserver, setId);
+        ParticipantFacade.participate(pin, "player", participationObserver, questionObserver, setId, scoreObserver);
     }
     const getQuestion = () => {
     }

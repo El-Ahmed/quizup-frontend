@@ -11,11 +11,12 @@ import WebSocketSender from "../websocket/WebSocketSender";
 import AnsweringController from "../playingControllers/AnsweringController";
 import AnswerSender from "../senders/AnswerSender";
 import Choice from "../quizEntities/Choice";
+import ScoreController, { ScoreObserver } from "../participationControllers/ScoreController";
+import ScoreReceiver from "../receivers/ScoreReceiver";
 
-type AnswerSenderSetter = (answerSender: (choice:Choice) => void) => void;
 
 
-const participate = (pin:string, playerName:string, participationObserver:ParticipationObserver, questionObserver:QuestionObserver, setId:(id:string)=>void) => {
+const participate = (pin:string, playerName:string, participationObserver:ParticipationObserver, questionObserver:QuestionObserver, setId:(id:string)=>void, scoreObserver:ScoreObserver) => {
 
 
 
@@ -27,6 +28,8 @@ const participate = (pin:string, playerName:string, participationObserver:Partic
     const webSocketPublisher = new WebSocketPublisher(stompClient);
     const participationAcceptenceReceiver = new ParticipationAcceptenceReceiver(participationController);
 
+    const scoreController = new ScoreController(scoreObserver);
+    const scoreReceiver = new ScoreReceiver(scoreController);
     
 
 
@@ -39,6 +42,7 @@ const participate = (pin:string, playerName:string, participationObserver:Partic
         const newId = await participationController.generateId();
         if (!newId) return;
                 webSocketPublisher.subscribe(participationAcceptenceReceiver,"Players/"+newId+"/acceptence");
+                webSocketPublisher.subscribe(scoreReceiver,"Players/"+newId+"/score");
                 participationController.attendCompetition(pin,playerName)
                 setId(newId);
                 observeQuestions(questionObserver,webSocketPublisher,pin);

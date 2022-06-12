@@ -27,27 +27,32 @@ export default function PlayerWaiting() {
 	const [id, setId] = useState<string>();
 	const [accepted, setAccepted] = useState(false);
 	const [ready, setReady] = useState(false);
-    const questionObserver = (question:Question)=> {setCurrentQuestion(question)}
+    const questionObserver = (question:Question)=> {
+		setCurrentQuestion(question);
+		setScore(-1);
+	}
 	const participationObserver = (id:string) => {setAccepted(true); setId(id)};
 
 	const [answerController,setAnswerController] = useState<AnsweringController>();
-	const [sendAnswer,setAnswerSender] = useState<(choice:Choice)=>void>();
+	const [score,setScore] = useState(-1);
 	// const set2 =(send2:(choice:Choice) => void) => {
 	// 	setAnswerSender(send2);
 	// 	console.log(send2);
 	// 	console.log("test");
 	// 	console.log(sendAnswer);
 	// }
+	const scoreObserver = (score:number) => {
+		console.log("your score is %d", score);
+		setScore(score);
+	}
     
 	const setId2 = (newId:string) => {
 		if (!id)
 			setId(newId)
-
 	}
 	useEffect(() => {
 		if (pin && name) {
-       		setAnswerController(ParticipantFacade.participate(pin, name, participationObserver, questionObserver, setId2));
-			
+       		setAnswerController(ParticipantFacade.participate(pin, name, participationObserver, questionObserver, setId2, scoreObserver));
 		}
 	}, [pin,name]);
 
@@ -63,7 +68,7 @@ export default function PlayerWaiting() {
 	
 	return (
 		<>
-		<Question1 question={currentQuestion} answeringController={answerController} pin={pin} playerId={id}></Question1>
+			<Question1 question={currentQuestion} answeringController={answerController} pin={pin} playerId={id} score = {score}></Question1>
 		</>
 	);
 }

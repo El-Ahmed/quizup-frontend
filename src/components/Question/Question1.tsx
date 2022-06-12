@@ -9,8 +9,9 @@ interface Quest {
 	answeringController: AnsweringController,
 	pin:string,
 	playerId:string
+	score:number
 }
-export default function Question1({question, answeringController, pin, playerId}: Quest) {
+export default function Question1({question, answeringController, pin, playerId, score}: Quest) {
 	
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 	const [didAnswer, setDidAnswer] = useState(false);
@@ -19,11 +20,18 @@ export default function Question1({question, answeringController, pin, playerId}
 		answeringController.answer(choice,pin,playerId);
 		setDidAnswer(true);
 	}
-	if (didAnswer)
+	if (didAnswer && score ==-1)
 	return (<div className='card' style={{textAlign: "center"}}>
 			<h2>{question.getQuestionText()}</h2>
-			<h4> Your Answer was sent <br></br> wait for the next question or score</h4>
+			<h4> Your answer was sent <br></br> wait for the next question or score</h4>
 	</div>);
+	
+	if (score !=-1)
+	return (<div className='card' style={{textAlign: "center"}}>
+			<h2>{question.getQuestionText()}</h2>
+			<h4> Your score is {score}<br/> wait for the next question</h4>
+	</div>);
+
 	return (
 		<div className='app'>
 				<>
