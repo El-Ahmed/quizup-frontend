@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { finished } from 'stream';
 import Player from '../../socketsModule/competitionEntities/Player';
 import './Score.css' ;
 
 interface scores {
 	players:Player[];
     questionNumber: number;
+	nextQuestion: ()=>void;
+	finished: boolean;
 }
 
 export default function Scores(props:scores) {
 
-	
+
 	return (
 		<div className='score-wrapper'>
 					<div className='theme'>
-							Movies / Chernobyl			
+							Hosting a Quiz		
 					</div>
 					<div className='score-container'>
 						<div className='scorPOLJBe-title'>
                             <div className='question-count'>
-                                <span>Question 1 / 15 </span>
+                                <span>Question {props.questionNumber} 
+									{props.finished && <> (Quiz ended)</>}
+								</span>
                             </div>
 							<p>SCORES :</p>
 						</div>
@@ -29,9 +34,10 @@ export default function Scores(props:scores) {
 							)}
 						</div>
 					</div>				
-					<div className='bouttons'>
-						<button  className="play">Next Question</button>
-					</div>
+					{!props.finished &&
+					<div  className='bouttons'>
+						<button onClick={()=>{props.nextQuestion()}} className="play">Next Question</button>
+					</div>}
 
 		</div>
 	);

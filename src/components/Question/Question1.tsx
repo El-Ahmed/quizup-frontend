@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AnsweringController from '../../socketsModule/playingControllers/AnsweringController';
 import Choice from '../../socketsModule/quizEntities/Choice';
 import Question from '../../socketsModule/quizEntities/Question';
@@ -20,6 +20,10 @@ export default function Question1({question, answeringController, pin, playerId,
 		answeringController.answer(choice,pin,playerId);
 		setDidAnswer(true);
 	}
+	useEffect(() => {
+		setDidAnswer(false);
+	}, [question])
+	
 	if (didAnswer && score ==-1)
 	return (<div className='card' style={{textAlign: "center"}}>
 			<h2>{question.getQuestionText()}</h2>
@@ -29,7 +33,7 @@ export default function Question1({question, answeringController, pin, playerId,
 	if (score !=-1)
 	return (<div className='card' style={{textAlign: "center"}}>
 			<h2>{question.getQuestionText()}</h2>
-			<h4> Your score is {score}<br/> wait for the next question</h4>
+			<h4> Your score is {score} </h4>
 	</div>);
 
 	return (

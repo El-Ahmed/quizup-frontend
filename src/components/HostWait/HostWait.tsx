@@ -22,6 +22,7 @@ export default function Details() {
     const [competitionController, setCC] = useState<CompetitionController>();
 	const [playersNans, setPlayersNans] = useState<PlayerAnswered[]>([])
 	const [showingScores, setShowingScores] = useState(false);
+	const [finished, setfinished] = useState(false);
 
     const playerObserver = (players:Player[], question?:Question) => {
 		setPlayers(players); console.log("change happended");
@@ -39,7 +40,7 @@ export default function Details() {
 		setPlayersNans(playernans);
 		console.log(playernans);
 		};
- 	const quiz = new Quiz('name','desc',[new Question("test1",[new Choice(0,"wrong"), new Choice(1,"right")]),new Question("test2",[])]);
+ 	const quiz = new Quiz('name','desc',[new Question("test1",[new Choice(0,"wrong"), new Choice(1,"right")]),new Question("test2",[new Choice(0,"wrong2"), new Choice(1,"right2")])]);
     const host = ()=> {
         createCompetition(quiz,playerObserver)
         .then(cc => {
@@ -57,10 +58,12 @@ export default function Details() {
 		
     }
     const next = () => {
-        if (qc) {
-
-        nextQuestion(qc);
-		setQN(questionNum+1);
+        if (qc && !finished) {
+  	    	nextQuestion(qc);
+			setQN(questionNum+1);
+			setShowingScores(false);
+			if (qc.currentQuestionIndex==questionNum)
+				setfinished(true);
 		}
     }
 	const showScores = () => {
@@ -78,7 +81,7 @@ export default function Details() {
 	
 	//if(!qc) return <>sad</>;
 	if (showingScores) {
-		return (<Scores players={players} questionNumber={questionNum}></Scores>);
+		return (<Scores finished={finished} players={players} questionNumber={questionNum} nextQuestion={next}></Scores>);
 	}
 
 	if (questionNum !=0){
