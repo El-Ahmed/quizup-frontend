@@ -12,7 +12,8 @@ interface Iprops {
     players: Player[];
     currentQuestion?: Question;
     questionNumber: number;
-	playerAnswered:PlayerAnswered[]
+	playerAnswered:PlayerAnswered[];
+	showScores: ()=>void;
 }
 
 
@@ -20,11 +21,7 @@ export default function AnswerState(props:Iprops) {
 
 	
 	
-	const checkAnswer = (player:Player) => {
-		if (props.currentQuestion && player.didAnswer(props.currentQuestion))
-			return "did answer";
-		return "didn't answer yet"
-	}
+
 	const didAnswer = (answred:boolean) => {
 		if (answred) 
 			return "did answer";
@@ -51,9 +48,7 @@ export default function AnswerState(props:Iprops) {
 						</div>
 					</div>				
 					<div className='bouttons'>
-						<Link to='/score'>
-							<button  className="play">Show scores</button>
-						</Link>
+						<button onClick={()=>{props.showScores()}} className="play">Show scores</button>
 					</div>
 
 		</div>

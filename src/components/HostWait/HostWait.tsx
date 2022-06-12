@@ -8,6 +8,7 @@ import Quiz from "../../socketsModule/quizEntities/Quiz";
 import AnswerState , {PlayerAnswered} from '../AnswerState/AnsweringState';
 import Choice from '../../socketsModule/quizEntities/Choice';
 import Player from '../../socketsModule/competitionEntities/Player';
+import CompetitionController from '../../socketsModule/competitionControllers/CompetitionController';
 
 
 
@@ -17,7 +18,7 @@ export default function Details() {
     const [qc, setQC] = useState<QuestionsController>()
     const [players, setPlayers] = useState<Player[]>([])
     const [questionNum, setQN] = useState(0);
-    const [counter, setCounter] = useState(0);
+    const [competitionController, setCC] = useState<CompetitionController>();
 	const [playersNans, setPlayersNans] = useState<PlayerAnswered[]>([])
 
     const playerObserver = (players:Player[], question?:Question) => {
@@ -41,6 +42,7 @@ export default function Details() {
         createCompetition(quiz,playerObserver)
         .then(cc => {
             setQC(cc.getQuestionController());
+			setCC(cc);
 			if (qc)
             setPin(qc.getPin())
         } );
@@ -59,6 +61,9 @@ export default function Details() {
 		setQN(questionNum+1);
 		}
     }
+	const showScores = () => {
+		competitionController?.sendScores();
+	}
 
 	useEffect(() => {
 	  host();
@@ -68,10 +73,10 @@ export default function Details() {
 		setPin(qc?.getPin());
 	}, [qc])
 	
-	if(!qc) return <>sad</>;
+	//if(!qc) return <>sad</>;
 
 	if (questionNum !=0){
-		return (<AnswerState players={players} playerAnswered= {playersNans} currentQuestion={qc?.getCurrentQuestion()} questionNumber = {questionNum}/>)
+		return (<AnswerState players={players} playerAnswered={playersNans} currentQuestion={qc?.getCurrentQuestion()} questionNumber={questionNum} showScores={showScores}/>)
 
 	}
 	
