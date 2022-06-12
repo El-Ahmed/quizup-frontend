@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './HostWait.css' ;
 import { createCompetition, nextQuestion, startCompetition } from "../../socketsModule/facade/HostFacade";
 import QuestionsController from "../../socketsModule/quizControllers/QuestionsController";
@@ -10,11 +10,20 @@ import Choice from '../../socketsModule/quizEntities/Choice';
 import Player from '../../socketsModule/competitionEntities/Player';
 import CompetitionController from '../../socketsModule/competitionControllers/CompetitionController';
 import Scores from '../Score/Scores';
+import generateQuiz from '../../socketsModule/facade/FactoryFacade';
 
 
 
 export default function Details() {
 
+	const [quiz, setQuiz] =useState<Quiz>();
+	const { id } = useParams();
+	useEffect(() => {
+		fetch("http://localhost:8080/quiz?id="+id)
+            .then(response => response.json())
+            .then(data => {setQuiz(generateQuiz(data)); console.log(data);});
+	}, [id])
+	
 	const [pin, setPin] = useState('')
     const [qc, setQC] = useState<QuestionsController>()
     const [players, setPlayers] = useState<Player[]>([])
@@ -41,8 +50,9 @@ export default function Details() {
 		setPlayersNans(playernans);
 		console.log(playernans);
 		};
- 	const quiz = new Quiz('name','desc',[new Question("test1",[new Choice(0,"wrong"), new Choice(1,"right")]),new Question("test2",[new Choice(0,"wrong2"), new Choice(1,"right2")])]);
+ 	// const quiz = new Quiz('name','desc',[new Question("test1",[new Choice(0,"wrong"), new Choice(1,"right")]),new Question("test2",[new Choice(0,"wrong2"), new Choice(1,"right2")])]);
     const host = ()=> {
+		if(quiz)
         createCompetition(quiz,playerObserver)
         .then(cc => {
             setQC(cc.getQuestionController());
@@ -55,6 +65,8 @@ export default function Details() {
         if (qc) {
         startCompetition(qc);
 		setQN(1);
+		if (qc.currentQuestionIndex==questionNum)
+			setfinished(true);
 		}
 		
     }
@@ -83,7 +95,7 @@ export default function Details() {
 
 	useEffect(() => {
 	  host();
-	}, [])
+	}, [quiz])
 	useEffect(() => {
 		if (qc)
 		setPin(qc?.getPin());
