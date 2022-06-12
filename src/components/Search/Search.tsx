@@ -1,17 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import QuizCard from "../QuizCard/QuizCard";
 
 import './search.css';
 
 
 
-function Search() {
-    const quizzes = [1,1,1,1,1,1]
+export default function Search() {
+    const [quizzes, setQuizzes] = useState([]);
     useEffect(() => {
-      
         fetch("http://localhost:8080/quizzes")
             .then(response => response.json())
-            .then(data => console.log(data));
+            .then(data => {setQuizzes(data); console.log(data);});
+    
     }, [])
     
     
@@ -19,10 +19,8 @@ function Search() {
         <div>
             <h3 className="link">Explore / search="Countries"</h3>
             <div className="searchList">
-                {quizzes.map((quiz) => <div className="card"><QuizCard  /></div>)}
+                {quizzes.map((quiz) => <div className="card"><QuizCard  quiz={quiz}/></div>)}
             </div>
         </div>
     )
 }
-
-export default Search;
