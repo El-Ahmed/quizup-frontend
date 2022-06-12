@@ -13,22 +13,17 @@ interface Quest {
 export default function Question1({question, answeringController, pin, playerId}: Quest) {
 	
 	const [currentQuestion, setCurrentQuestion] = useState(0);
-	const [showScore, setShowScore] = useState(false);
-	const [score, setScore] = useState(0);
-	const [counter, setCounter] = useState(15);
-// 
-	// React.useEffect(() => {
-		// const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-		// return () => clearInterval(timer);
-	//   }, [counter]);
+	const [didAnswer, setDidAnswer] = useState(false);
 
-	const handleAnswerOptionClick = (isCorrect) => {
-	
-	};
 	const choseAnswer = (choice:Choice) => {
 		answeringController.answer(choice,pin,playerId);
-		console.log("player Id when answering " + playerId);
+		setDidAnswer(true);
 	}
+	if (didAnswer)
+	return (<div className='card' style={{textAlign: "center"}}>
+			<h2>{question.getQuestionText()}</h2>
+			<h4> Your Answer was sent <br></br> wait for the next question or score</h4>
+	</div>);
 	return (
 		<div className='app'>
 				<>
