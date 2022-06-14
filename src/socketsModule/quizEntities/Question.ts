@@ -26,7 +26,7 @@ export default class Question {
     }
     public setChoices(choicesJson) {
         choicesJson.forEach(choice => {
-            this.choices.push(new Choice(choice.score,choice.text))
+            this.choices.push(new Choice(Number(choice.score),choice.text))
         });
     }
     public getChoices():Choice[] {
