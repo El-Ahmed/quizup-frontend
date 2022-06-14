@@ -1,6 +1,7 @@
 .App {
   /* text-align: center; */
   flex: 1;
+  background-image: url("./assets/background.png");
 }
 .AppSidebar {
   display: flex;
