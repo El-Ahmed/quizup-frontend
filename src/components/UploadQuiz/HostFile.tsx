@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import './HostWait.css' ;
+import '../HostWait/HostWait.css' ;
 import { createCompetition, nextQuestion, startCompetition } from "../../socketsModule/facade/HostFacade";
 import QuestionsController from "../../socketsModule/quizControllers/QuestionsController";
 import Question from "../../socketsModule/quizEntities/Question";
@@ -13,16 +13,12 @@ import Scores from '../Score/Scores';
 import generateQuiz from '../../socketsModule/facade/FactoryFacade';
 
 
+interface IHostFile {
+	quiz:Quiz;
+}
 
-export default function Details() {
+export default function HostFile({quiz}:IHostFile) {
 
-	const [quiz, setQuiz] =useState<Quiz>();
-	const { id } = useParams();
-	useEffect(() => {
-		fetch("http://localhost:8080/quiz?id="+id)
-            .then(response => response.json())
-            .then(data => {setQuiz(generateQuiz(data)); console.log(data);});
-	}, [id])
 	
 	const [pin, setPin] = useState('')
     const [qc, setQC] = useState<QuestionsController>()
@@ -65,7 +61,7 @@ export default function Details() {
         if (qc) {
         startCompetition(qc);
 		setQN(1);
-		if (qc.getCount()==questionNum)
+		if (qc.currentQuestionIndex==questionNum)
 			setfinished(true);
 		}
 		
@@ -75,7 +71,7 @@ export default function Details() {
   	    	nextQuestion(qc);
 			setQN(questionNum+1);
 			setShowingScores(false);
-			if (qc.currentQuestionIndex==questionNum)
+			if (qc.getCount()==questionNum)
 				setfinished(true);
 		}
     }

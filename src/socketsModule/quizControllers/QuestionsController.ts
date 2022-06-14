@@ -32,4 +32,7 @@ export default class QuestionsController {
     public getPin() {
         return this.pin;
     }
+    public getCount() {
+        return this.questions.length;
+    }
 }

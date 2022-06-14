@@ -87,7 +87,7 @@
   }
   
   .host {
-    background-color: #cccccc !important;
+    background-color: #999999!important;
     min-width: 200px;
     flex:40% !important;
   }
