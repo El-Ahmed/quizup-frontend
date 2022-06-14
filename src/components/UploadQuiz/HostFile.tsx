@@ -61,7 +61,7 @@ export default function HostFile({quiz}:IHostFile) {
         if (qc) {
         startCompetition(qc);
 		setQN(1);
-		if (qc.currentQuestionIndex==questionNum)
+		if (qc.getCount()==1)
 			setfinished(true);
 		}
 		
@@ -69,10 +69,10 @@ export default function HostFile({quiz}:IHostFile) {
     const next = () => {
         if (qc && !finished) {
   	    	nextQuestion(qc);
+			if (qc.getCount()==questionNum+1)
+				setfinished(true);
 			setQN(questionNum+1);
 			setShowingScores(false);
-			if (qc.getCount()==questionNum)
-				setfinished(true);
 		}
     }
 	const showScores = () => {

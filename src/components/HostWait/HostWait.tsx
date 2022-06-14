@@ -65,7 +65,7 @@ export default function Details() {
         if (qc) {
         startCompetition(qc);
 		setQN(1);
-		if (qc.getCount()==questionNum)
+		if (qc.getCount()==1)
 			setfinished(true);
 		}
 		
@@ -73,10 +73,10 @@ export default function Details() {
     const next = () => {
         if (qc && !finished) {
   	    	nextQuestion(qc);
+			if (qc.getCount()==questionNum+1)
+				setfinished(true);
 			setQN(questionNum+1);
 			setShowingScores(false);
-			if (qc.currentQuestionIndex==questionNum)
-				setfinished(true);
 		}
     }
 	const showScores = () => {
