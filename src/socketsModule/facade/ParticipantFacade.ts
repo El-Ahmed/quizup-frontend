@@ -21,7 +21,7 @@ const participate = (pin:string, playerName:string, participationObserver:Partic
 
 
     const idGenerator = new IdGenerator();
-    const stompClient = Stomp.over(new SockJS("http://localhost:8080/ws"));
+    const stompClient = Stomp.over(new SockJS("http://"+process.env.REACT_APP_SERVER_ADDRESS+":8080/ws"));
     const webSocketSender = new WebSocketSender(stompClient);
     const participationController = new ParticipationController(new ParticipationSender(webSocketSender),idGenerator, participationObserver);
 

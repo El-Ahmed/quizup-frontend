@@ -17,7 +17,7 @@ export default function Search() {
     const [quizzes, setQuizzes] = useState<Quiz[]>([]);
     const [searchedQuizzes, setSQuizzes] = useState<Quiz[]>([]);
     useEffect(() => {
-        fetch("http://localhost:8080/quizzes")
+        fetch("http://"+process.env.REACT_APP_SERVER_ADDRESS+":8080/quizzes")
             .then(response => response.json())
             .then(data => {setQuizzes(data); setSQuizzes(search(data)); console.log(data);});
     

@@ -18,7 +18,7 @@ import WebSocketSender from "../websocket/WebSocketSender";
 const createCompetition  =  async (quiz:Quiz, playersObserver:PlayersObserver) => {
 
     
-    const stompClient = Stomp.over(new SockJS("http://localhost:8080/ws"));
+    const stompClient = Stomp.over(new SockJS("http://"+process.env.REACT_APP_SERVER_ADDRESS+":8080/ws"));
     const webSocketPublisher = new WebSocketPublisher(stompClient);
     const webSocketSender = new WebSocketSender(stompClient);
     const participationAcceptenceSender = new ParticipationAcceptenceSender(webSocketSender);

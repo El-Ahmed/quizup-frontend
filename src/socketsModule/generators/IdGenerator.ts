@@ -10,7 +10,7 @@ export default class IdGenerator {
             return this.id;
 
 
-        const res = await fetch("http://localhost:8080/v1/new-player-id");
+        const res = await fetch("http://"+process.env.REACT_APP_SERVER_ADDRESS+":8080/v1/new-player-id");
         const resjson = await res.json();
         const message = resjson.message;
         this.id = message;

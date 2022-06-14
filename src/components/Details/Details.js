@@ -18,7 +18,7 @@ export default function Details() {
 	const [quiz, setQuiz] =useState();
 	const { id } = useParams();
 	useEffect(() => {
-		fetch("http://localhost:8080/quiz?id="+id)
+		fetch("http://"+process.env.REACT_APP_SERVER_ADDRESS+":8080/quiz?id="+id)
             .then(response => response.json())
             .then(data => {setQuiz(generateQuiz(data)); console.log(data);});
 	}, [id])
