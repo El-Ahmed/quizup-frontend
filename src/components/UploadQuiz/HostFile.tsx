@@ -109,7 +109,7 @@ export default function HostFile({quiz}:IHostFile) {
 	return (
 		<div className='app'>
 					<div className='theme'>
-							Movies / Chernobyl			
+							MyQuiz			
 					</div>
 					<div className='quizz-card'>
 						<div className='image-container'>
