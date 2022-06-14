@@ -23,6 +23,7 @@ import PlayerWait from './components/PlayerWait/PlayerWait';
 import PlayerTest from './testComponents/HostTest/PlayerTest';
 import PlayerWaiting from './components/PlayerWait/PlayerWaiting';
 import UploadQuiz from './components/UploadQuiz/UploadQuiz';
+import Form from './components/Quiz_creator/Form_sec';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path='/playertest' element={<PlayerTest/>} />
           <Route path='/playwaiting' element={<PlayerWaiting/>} />
           <Route path='/myquiz' element={<UploadQuiz/>} />
+          <Route path='/create' element={<Form/>}/>
       </Routes>
     </div>
     </div>

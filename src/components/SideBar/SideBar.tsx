@@ -32,6 +32,7 @@ function SideBar() {
         <Link to='myquiz'>
         <Button onClick={() => {setChosen(3)}} className={chosenClass(3)}>My Quizzes</Button>
         </Link>
+        <Button onClick={() => {setChosen(4)}} className={chosenClass(4)}><Link to="/create">Create quizes</Link></Button>
     </div>
     );
 }
